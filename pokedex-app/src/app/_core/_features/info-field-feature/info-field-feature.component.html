@@ -1,0 +1,50 @@
+
+<div class="wrapper">
+  <ng-container *ngIf="this.infoitem?.name == 'DUMMY'; else infoItemChanged">
+    <!-- <span>no info Item selected</span> -->
+    <img class="nothing_selected" src="../../../../assets/images/whos_that_pokemon.png" alt="nothing_selected">
+  </ng-container>
+  <ng-template #infoItemChanged>
+    <mat-card class="card">
+      <mat-tab-group>
+        <mat-tab class="tab" label="Name: {{this.infoitem?.name.toUpperCase()}}">
+          <div class="grid-container">
+            <div class="grid-item">
+              <ng-container *ngIf="this.sprites.sprites.front_default;else alt_icon">
+                <img src="{{this.sprites.sprites.front_default}}" alt="front_default">
+              </ng-container>
+              <ng-template #alt_icon>
+                <mat-icon fontIcon="no_photography"></mat-icon>
+              </ng-template>
+            </div>
+            <div class="grid-item">
+              <p class="headlines">Fähigkeiten:</p>
+              <mat-chip-list>
+                <ng-container *ngFor="let ability of this.infoitem?.abilities">
+                  <mat-chip>{{ability?.ability?.name}}</mat-chip>
+                </ng-container>
+              </mat-chip-list>
+            </div>
+            <div class="grid-item">
+              <p><span class="headlines">Basis Erfahrung: </span>{{this.infoitem?.base_experience}}</p>
+            </div>
+            <div class="grid-item">
+              <p><span class="headlines">Höhe: </span>{{this.infoitem?.height}}</p>
+            </div>
+            <div class="grid-item">
+              <p><span class="headlines">Gewicht: </span>{{this.infoitem?.weight}}</p>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab class="tab" label="Attacken">
+          <mat-chip-list>
+            <ng-container *ngFor="let moves of this.infoitem.moves">
+              <mat-chip>{{moves.move.name}}</mat-chip>
+            </ng-container>
+          </mat-chip-list>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+
+  </ng-template>
+</div>

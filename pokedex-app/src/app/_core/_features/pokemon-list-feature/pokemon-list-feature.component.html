@@ -1,0 +1,19 @@
+
+<div class="wrapper">
+  <ng-container *ngIf="!this.loaded;else hasloaded">
+    <mat-spinner class="loading"></mat-spinner>
+  </ng-container>
+  <ng-template #hasloaded>
+    <ng-container *ngIf="this.pokemons.results.length > 0;else hasPokemons">
+      <h2 class="headline">Pokedex (Einträge: {{this.pokemons.results.length}})</h2>
+      <mat-list role="list">
+        <ng-container *ngFor="let pokemon of this.pokemons.results">
+          <mat-list-item matRipple class="item" role="listitem" (click)="getPokemonInfo(pokemon)">{{pokemon.name.toUpperCase()}}</mat-list-item>
+        </ng-container>
+      </mat-list>
+    </ng-container>
+    <ng-template #hasPokemons>
+      <span>No entry found</span>
+    </ng-template>
+  </ng-template>
+</div>
